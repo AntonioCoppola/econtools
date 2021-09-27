@@ -86,7 +86,7 @@ def reg(df: pd.DataFrame,
 def ivreg(df: pd.DataFrame,
           y_name: str,
           x_name: Union[str, List[str]], z_name: Union[str, List[str]],
-          w_name: Union[str, List[str]],
+          w_name: Optional[Union[str, List[str]]]=None,
           fe_name: Optional[str]=None, a_name: Optional[str]=None,
           nosingles: bool=True,
           iv_method: str='2sls', _kappa_debug=None,
@@ -125,6 +125,8 @@ def ivreg(df: pd.DataFrame,
     """
 
     fe_name = _a_name_deprecation_handling(a_name, fe_name)
+    if w_name is None:
+        w_name = []
 
     IVRegWorker = IVReg(
         df, y_name, x_name, z_name, w_name,
