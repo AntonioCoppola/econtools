@@ -249,7 +249,7 @@ def _demean(A, df):
     else:
         group_name = A.name
         mean = df.groupby(A).mean()
-        large_mean = force_df(A).join(mean, on=group_name).drop(group_name,
+        large_mean = force_df(A, name=group_name).join(mean, on=group_name).drop(group_name,
                                                                 axis=1)
         if df.ndim == 1:
             large_mean = large_mean.squeeze()
